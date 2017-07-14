@@ -36,7 +36,9 @@ namespace CurrenyRate
 
             SqlConnection sqlc = new SqlConnection();
             sqlc.ConnectionString = @"Persist Security Info=False;Integrated Security=true;
-                     Initial Catalog=budget;Server=GHQDB2\MSSQL2 ; user id = budget ; password = KMn32SRV";
+                            Initial Catalog = budget; Server = GHQDB2\MSSQL2; user id = budget; password = KMn32SRV";
+            //Initial Catalog = budget; Server = reportcenter; user id = sa; password = 1qaz@WSX3edc";
+                     
             sqlc.Open();
 
             for (int i = 0; i < cur.Length; i++)

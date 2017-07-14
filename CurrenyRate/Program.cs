@@ -19,15 +19,18 @@ namespace CurrenyRate
             string Year = DateTime.Now.AddMonths(-1).Year.ToString();
             string Month = DateTime.Now.AddMonths(-1).Month.ToString();
             string date = Year + "-" + ("0" + Month).Substring(0, 2);
-           
 
+            
+            //*****新增幣別放這****//
             string[] cur = new string [] { "USD", "HKD", "JPY", "KRW" };
+
             decimal[] rate = new decimal[100];
             GetCurrencyRate CR;
 
             for (int i = 0; i < cur.Length; i++)
             {
                 CR = new GetCurrencyRate(date, cur[i]);
+                //***取匯率**
                 rate[i] = CR.GetRate();
             }
 
@@ -38,6 +41,7 @@ namespace CurrenyRate
 
             for (int i = 0; i < cur.Length; i++)
             {
+                //****塞資料庫****
                 insertDB(sqlc, cur[i] ,rate[i],Year,Month);
             }
             sqlc.Close();
@@ -54,6 +58,7 @@ namespace CurrenyRate
 
             try
             {
+                //***先刪再塞****
                 comm.CommandText = string.Format("delete tbl_CurrencyInfo where Year ={0} and Month ={1} and Currency='{2}' and [Type] = 'ACTUAL'", year, month, currency);
                 comm.ExecuteNonQuery();
                 comm.CommandText = string.Format("insert tbl_CurrencyInfo values ('{0}','{1}','{2}','{3}','ACTUAL') ", year, month, currency, rate);

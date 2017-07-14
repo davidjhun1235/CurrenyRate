@@ -31,6 +31,7 @@ namespace CurrenyRate
 
         public GetCurrencyRate(string date,string currency)
         {
+            //***台銀網頁http://rate.bot.com.tw/xrt/quote/2017-06/USD *****
             webUrl = @"http://rate.bot.com.tw/xrt/quote/" + date + "/" + currency;
             Currency = currency;
         }
